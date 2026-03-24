@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Completo — Transforme Sua Carreira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --bg-input: #1a1a1a;
+            --text-primary: #f5f0eb;
+            --text-secondary: #a09890;
+            --text-muted: #6b6560;
+            --accent: #c8956c;
+            --accent-light: #e0b08a;
+            --accent-dark: #a07048;
+            --accent-glow: rgba(200, 149, 108, 0.15);
+            --green: #5cb85c;
+            --green-dark: #3d8b3d;
+            --border: #2a2520;
+            --border-light: #3a3530;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'Outfit', system-ui, sans-serif;
+            --shadow: 0 4px 30px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 3px; }
+
+        /* Utility */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== TOP BAR ==================== */
+        .top-bar {
+            background: var(--accent);
+            color: var(--bg-primary);
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .top-bar span { animation: pulse 2s infinite; }
+
+        /* ==================== COUNTDOWN ==================== */
+        .countdown-bar {
+            background: linear-gradient(135deg, var(--bg-secondary), #1a1512);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+            text-align: center;
+        }
+        .countdown-bar p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .countdown-bar p strong { color: var(--accent-light); }
+        .countdown-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .countdown-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 14px;
+            min-width: 60px;
+            text-align: center;
+        }
+        .countdown-item .num {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--accent-light);
+            display: block;
+            line-height: 1.2;
+        }
+        .countdown-item .lbl {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            position: relative;
+            padding: 80px 0 60px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(200,149,108,0.08) 0%, transparent 70%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-dark), transparent);
+        }
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-glow);
+            border: 1px solid rgba(200,149,108,0.3);
+            color: var(--accent-light);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+            line-height: 1.15;
+            margin-bottom: 18px;
+            color: var(--text-primary);
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 550px;
+            margin: 0 auto 36px;
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg), 0 0 80px rgba(200,149,108,0.08);
+            border: 1px solid var(--border);
+            animation: fadeUp 1s ease 0.2s both;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: #080808;
+        }
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(145deg, #1a1512, #0d0b09);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .video-placeholder:hover { background: linear-gradient(145deg, #201a15, #12100d); }
+        .play-btn {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 0 40px rgba(200,149,108,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .video-placeholder:hover .play-btn {
+            transform: scale(1.08);
+            box-shadow: 0 0 60px rgba(200,149,108,0.4);
+        }
+        .play-btn svg { width: 28px; height: 28px; fill: var(--bg-primary); margin-left: 3px; }
+        .video-placeholder span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ==================== BENEFITS ==================== */
+        .benefits {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .benefits-header { text-align: center; margin-bottom: 50px; }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .benefit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 24px;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-dark);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .benefit-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(200,149,108,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+        }
+        .benefit-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .benefit-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ==================== MODULES ==================== */
+        .modules { padding: 80px 0; }
+        .modules-header { text-align: center; margin-bottom: 50px; }
+        .module-list { max-width: 700px; margin: 0 auto; }
+        .module-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .module-item:hover { border-color: var(--border-light); }
+        .module-header {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .module-header:hover { background: var(--bg-card-hover); }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--accent);
+            min-width: 36px;
+        }
+        .module-info { flex: 1; }
+        .module-info h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        .module-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .module-arrow {
+            color: var(--text-muted);
+            transition: transform 0.3s;
+            font-size: 0.9rem;
+        }
+        .module-item.open .module-arrow { transform: rotate(180deg); }
+        .module-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .module-body-inner {
+            padding: 0 24px 20px 76px;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.8;
+        }
+        .module-body-inner li { list-style: none; position: relative; padding-left: 18px; }
+        .module-body-inner li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ==================== TESTIMONIALS ==================== */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .testimonials-header { text-align: center; margin-bottom: 50px; }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+        .testimonial-stars {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+        .testimonial-card blockquote {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--bg-primary);
+        }
+        .testimonial-author-info strong {
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: block;
+            color: var(--text-primary);
+        }
+        .testimonial-author-info span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== PRICING & FORM ==================== */
+        .purchase {
+            padding: 80px 0;
+            background: radial-gradient(ellipse at 50% 100%, rgba(200,149,108,0.06) 0%, transparent 70%);
+        }
+        .purchase-header { text-align: center; margin-bottom: 50px; }
+        .purchase-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .purchase-card-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Price Card */
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 30px;
+            position: sticky;
+            top: 30px;
+        }
+        .price-tag {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+        }
+        .price-old {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+        .price-current {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--accent-light);
+            line-height: 1;
+        }
+        .price-current small {
+            font-size: 1.2rem;
+            vertical-align: top;
+            margin-right: 2px;
+        }
+        .price-installment {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+        .price-features { list-style: none; margin-bottom: 28px; }
+        .price-features li {
+            padding: 8px 0;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .price-features li .check {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .guarantee-box {
+            background: rgba(92, 184, 92, 0.08);
+            border: 1px solid rgba(92, 184, 92, 0.2);
+            border-radius: var(--radius);
+            padding: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .guarantee-box .shield { font-size: 1.6rem; margin-bottom: 6px; }
+        .guarantee-box strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--green);
+            margin-bottom: 4px;
+        }
+        .guarantee-box p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .secure-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+        .secure-badge svg { width: 14px; height: 14px; fill: var(--text-muted); }
+
+
+        /* Submit */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.02em;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200,149,108,0.3);
+        }
+        .btn-submit:active { transform: translateY(0); }
+        .form-footer {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* ==================== FAQ ==================== */
+        .faq {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+        .faq-header { text-align: center; margin-bottom: 50px; }
+        .faq-list { max-width: 700px; margin: 0 auto; }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-align: left;
+            transition: color 0.2s;
+        }
+        .faq-question:hover { color: var(--accent); }
+        .faq-question .faq-icon {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 0 20px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ==================== CTA FINAL ==================== */
+        .final-cta {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-dark), transparent);
+        }
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200,149,108,0.3);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== WHATSAPP FLOAT ==================== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            z-index: 100;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37,211,102,0.5);
+        }
+        .whatsapp-float svg { width: 28px; height: 28px; fill: #fff; }
+
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .purchase-layout {
+                grid-template-columns: 1fr;
+            }
+            .price-card { position: static; order: -1; }
+            .form-row { grid-template-columns: 1fr; }
+            .payment-options { grid-template-columns: 1fr; }
+            .hero { padding: 50px 0 40px; }
+            .benefits, .modules, .testimonials, .purchase, .faq, .final-cta { padding: 50px 0; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .countdown-wrap { gap: 8px; }
+            .countdown-item { min-width: 50px; padding: 6px 10px; }
+            .countdown-item .num { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span>🔥 OFERTA POR TEMPO LIMITADO — Garanta seu desconto antes que acabe!</span>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="countdown-bar">
+        <p>A oferta encerra em:</p>
+        <div class="countdown-wrap">
+            <div class="countdown-item"><span class="num" id="cd-hours">23</span><span class="lbl">Horas</span></div>
+            <div class="countdown-item"><span class="num" id="cd-mins">59</span><span class="lbl">Min</span></div>
+            <div class="countdown-item"><span class="num" id="cd-secs">59</span><span class="lbl">Seg</span></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Vagas Limitadas</div>
+                <h1>Domine Novas Habilidades e <em>Transforme</em> Sua Carreira</h1>
+                <p>Aprenda com quem já trilhou o caminho. Um curso completo, prático e direto ao ponto para você alcançar resultados reais.</p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <!-- Substitua pelo seu iframe do YouTube/Vimeo -->
+                    <!-- <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID" allowfullscreen></iframe> -->
+                    <div class="video-placeholder" id="videoPlaceholder">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                        </div>
+                        <span>Assistir apresentação</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="beneficios">
+        <div class="container">
+            <div class="benefits-header reveal">
+                <span class="section-label">Por que este curso?</span>
+                <h2 class="section-title">Tudo que você precisa em um só lugar</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">📹</div>
+                    <h3>Aulas em Vídeo HD</h3>
+                    <p>Conteúdo gravado em alta qualidade, com explicações claras e exemplos práticos do dia a dia.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">📋</div>
+                    <h3>Material de Apoio</h3>
+                    <p>PDFs, planilhas e templates prontos para você aplicar imediatamente no seu trabalho.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Certificado</h3>
+                    <p>Receba seu certificado de conclusão para comprovar suas novas habilidades.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">💬</div>
+                    <h3>Suporte Direto</h3>
+                    <p>Tire suas dúvidas diretamente com o instrutor via grupo exclusivo de alunos.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">♾️</div>
+                    <h3>Acesso Vitalício</h3>
+                    <p>Compre uma vez e tenha acesso para sempre, incluindo futuras atualizações do curso.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">📱</div>
+                    <h3>Acesse de Qualquer Lugar</h3>
+                    <p>Assista pelo celular, tablet ou computador. Estude no seu ritmo, onde e quando quiser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules" id="conteudo">
+        <div class="container">
+            <div class="modules-header reveal">
+                <span class="section-label">Conteúdo do Curso</span>
+                <h2 class="section-title">O que você vai aprender</h2>
+            </div>
+            <div class="module-list">
+                <div class="module-item reveal">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <span class="module-num">01</span>
+                        <div class="module-info">
+                            <h4>Introdução e Fundamentos</h4>
+                            <span>4 aulas • 45 min</span>
+                        </div>
+                        <span class="module-arrow">▼</span>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-body-inner">
+                            <ul>
+                                <li>Boas-vindas e visão geral do curso</li>
+                                <li>Conceitos fundamentais que você precisa dominar</li>
+                                <li>Configurando seu ambiente de trabalho</li>
+                                <li>Primeiros passos práticos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-item reveal">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <span class="module-num">02</span>
+                        <div class="module-info">
+                            <h4>Aprofundando o Conhecimento</h4>
+                            <span>6 aulas • 1h 20min</span>
+                        </div>
+                        <span class="module-arrow">▼</span>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-body-inner">
+                            <ul>
+                                <li>Técnicas avançadas passo a passo</li>
+                                <li>Estudos de caso reais</li>
+                                <li>Erros comuns e como evitá-los</li>
+                                <li>Exercícios práticos guiados</li>
+                                <li>Estratégias para otimizar resultados</li>
+                                <li>Revisão e consolidação</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-item reveal">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <span class="module-num">03</span>
+                        <div class="module-info">
+                            <h4>Estratégias Avançadas</h4>
+                            <span>5 aulas • 1h 05min</span>
+                        </div>
+                        <span class="module-arrow">▼</span>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-body-inner">
+                            <ul>
+                                <li>Métodos que os profissionais usam</li>
+                                <li>Automatizando processos</li>
+                                <li>Análise de métricas e resultados</li>
+                                <li>Escalando suas operações</li>
+                                <li>Projeto final guiado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-item reveal">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <span class="module-num">04</span>
+                        <div class="module-info">
+                            <h4>Bônus Exclusivos</h4>
+                            <span>3 aulas • 35min</span>
+                        </div>
+                        <span class="module-arrow">▼</span>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-body-inner">
+                            <ul>
+                                <li>Masterclass com convidado especial</li>
+                                <li>Templates e ferramentas exclusivas</li>
+                                <li>Plano de ação personalizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="depoimentos">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <span class="section-label">Depoimentos</span>
+                <h2 class="section-title">O que nossos alunos dizem</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <blockquote>"O melhor investimento que fiz na minha carreira. O conteúdo é extremamente prático e já comecei a ver resultados na primeira semana."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MA</div>
+                        <div class="testimonial-author-info">
+                            <strong>Marcos Almeida</strong>
+                            <span>Empreendedor Digital</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <blockquote>"Curso didático, direto ao ponto. O suporte é incrível, todas as minhas dúvidas foram respondidas rapidamente."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JS</div>
+                        <div class="testimonial-author-info">
+                            <strong>Juliana Santos</strong>
+                            <span>Designer Freelancer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <blockquote>"Eu já fiz vários cursos online, mas esse é diferente. A qualidade do material e a clareza das explicações são outro nível."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">RC</div>
+                        <div class="testimonial-author-info">
+                            <strong>Rafael Costa</strong>
+                            <span>Analista de Marketing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purchase Section -->
+    <section class="purchase" id="comprar">
+        <div class="container">
+            <div class="purchase-header reveal">
+                <span class="section-label">Matricule-se Agora</span>
+                <h2 class="section-title">Comece sua transformação hoje</h2>
+            </div>
+            <div class="purchase-card-center">
+                <div class="price-card reveal" style="max-width:520px;margin:0 auto;">
+                    <div class="price-tag">
+                        <div class="price-old">De R$ 497,00</div>
+                        <div class="price-current"><small>R$</small> 197</div>
+                        <div class="price-installment">ou 12x de R$ 19,22</div>
+                    </div>
+                    <ul class="price-features">
+                        <li><span class="check">✓</span> Acesso vitalício ao curso completo</li>
+                        <li><span class="check">✓</span> +18 aulas em vídeo HD</li>
+                        <li><span class="check">✓</span> Material de apoio para download</li>
+                        <li><span class="check">✓</span> Certificado de conclusão</li>
+                        <li><span class="check">✓</span> Suporte direto com o instrutor</li>
+                        <li><span class="check">✓</span> Grupo exclusivo de alunos</li>
+                        <li><span class="check">✓</span> Atualizações futuras gratuitas</li>
+                        <li><span class="check">✓</span> Bônus exclusivos</li>
+                    </ul>
+
+                    <a href="#" id="kiwifyCheckoutBtn" class="btn-submit" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;">QUERO ME MATRICULAR AGORA</a>
+
+                    <div class="form-footer" style="margin-top:14px;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                        Pagamento seguro via Kiwify — PIX, cartão ou boleto
+                    </div>
+
+                    <div class="guarantee-box">
+                        <div class="shield">🛡️</div>
+                        <strong>Garantia de 7 dias</strong>
+                        <p>Se não gostar do curso, devolvemos 100% do seu dinheiro. Sem perguntas.</p>
+                    </div>
+                    <div class="secure-badges">
+                        <div class="secure-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                            Compra Segura
+                        </div>
+                        <div class="secure-badge">
+                            <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            Dados Protegidos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-header reveal">
+                <span class="section-label">Dúvidas</span>
+                <h2 class="section-title">Perguntas Frequentes</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Por quanto tempo terei acesso ao curso?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">O acesso é vitalício! Depois de adquirir o curso, você pode assistir quantas vezes quiser, para sempre. Isso inclui todas as atualizações futuras que fizermos no conteúdo.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        O curso oferece certificado?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim! Ao concluir todas as aulas, você receberá um certificado digital de conclusão que pode ser compartilhado no LinkedIn e usado em currículos.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        E se eu não gostar do curso?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Oferecemos garantia incondicional de 7 dias. Se por qualquer motivo você não ficar satisfeito, basta nos enviar uma mensagem e devolvemos 100% do seu investimento. Sem burocracia.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Preciso ter conhecimento prévio?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Não! O curso foi pensado para iniciantes e também para quem já tem alguma experiência. Começamos do básico e avançamos gradualmente até técnicas profissionais.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Como funciona o suporte?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Você terá acesso a um grupo exclusivo de alunos onde pode tirar dúvidas diretamente com o instrutor. Além disso, pode entrar em contato via WhatsApp para atendimento personalizado.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Quais formas de pagamento são aceitas?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Aceitamos PIX (com desconto especial), cartão de crédito (em até 12x) e boleto bancário. Escolha a forma que for mais conveniente para você.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container reveal">
+            <span class="section-label">Não perca esta oportunidade</span>
+            <h2 class="section-title">Pronto para começar?</h2>
+            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto; font-size: 0.95rem;">
+                Junte-se a centenas de alunos que já transformaram suas carreiras com nosso método.
+            </p>
+            <a href="#" class="btn-cta" id="kiwifyCtaBtn" target="_blank" rel="noopener">
+                QUERO ME MATRICULAR
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 — Todos os direitos reservados. | <a href="#faq" style="color:var(--accent);text-decoration:none;">FAQ</a></p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a class="whatsapp-float" href="https://wa.me/5500000000000?text=Olá! Gostaria de saber mais sobre o curso." target="_blank" rel="noopener" title="Fale conosco no WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+
+    <script>
+        // ===================== LOAD CONFIG FROM ADMIN =====================
+        const cfg = JSON.parse(localStorage.getItem('siteConfig') || 'null');
+
+        function escHtml(s) { return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
+
+        function applyConfig() {
+            if (!cfg) return;
+
+            // Top bar
+            if (cfg.topbarText) document.querySelector('.top-bar span').textContent = cfg.topbarText;
+
+            // Hero
+            if (cfg.heroBadge) document.querySelector('.hero-badge').textContent = cfg.heroBadge;
+            if (cfg.heroTitle) {
+                const h1 = document.querySelector('.hero h1');
+                h1.innerHTML = cfg.heroTitle.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            }
+            if (cfg.heroSubtitle) document.querySelector('.hero-content > p').textContent = cfg.heroSubtitle;
+
+            // Page title
+            if (cfg.courseName) document.title = cfg.courseName;
+
+            // Video
+            if (cfg.videoUrl) {
+                const wrapper = document.querySelector('.video-wrapper');
+                const placeholder = document.getElementById('videoPlaceholder');
+                let embedUrl = '';
+                if (cfg.videoType === 'youtube') {
+                    embedUrl = 'https://www.youtube.com/embed/' + cfg.videoUrl;
+                } else if (cfg.videoType === 'vimeo') {
+                    embedUrl = 'https://player.vimeo.com/video/' + cfg.videoUrl;
+                }
+                if (cfg.videoType === 'custom') {
+                    const video = document.createElement('video');
+                    video.src = cfg.videoUrl;
+                    video.controls = true;
+                    video.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
+                    if (placeholder) placeholder.remove();
+                    wrapper.appendChild(video);
+                } else if (embedUrl) {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = embedUrl;
+                    iframe.allowFullscreen = true;
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+                    if (placeholder) placeholder.remove();
+                    wrapper.appendChild(iframe);
+                }
+            }
+
+            // Benefits
+            if (cfg.benefitsTitle) document.querySelector('.benefits-header .section-title').textContent = cfg.benefitsTitle;
+            if (cfg.benefits && cfg.benefits.length) {
+                const grid = document.querySelector('.benefits-grid');
+                grid.innerHTML = cfg.benefits.map(b => `
+                    <div class="benefit-card reveal visible">
+                        <div class="benefit-icon">${escHtml(b.icon)}</div>
+                        <h3>${escHtml(b.title)}</h3>
+                        <p>${escHtml(b.desc)}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Modules
+            if (cfg.modulesTitle) document.querySelector('.modules-header .section-title').textContent = cfg.modulesTitle;
+            if (cfg.modules && cfg.modules.length) {
+                const list = document.querySelector('.module-list');
+                list.innerHTML = cfg.modules.map((m, i) => `
+                    <div class="module-item reveal visible">
+                        <div class="module-header" onclick="toggleModule(this)">
+                            <span class="module-num">${String(i+1).padStart(2,'0')}</span>
+                            <div class="module-info">
+                                <h4>${escHtml(m.title)}</h4>
+                                <span>${escHtml(m.duration)}</span>
+                            </div>
+                            <span class="module-arrow">▼</span>
+                        </div>
+                        <div class="module-body">
+                            <div class="module-body-inner">
+                                <ul>${m.lessons.map(l => `<li>${escHtml(l)}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Testimonials
+            if (cfg.testimonialsTitle) document.querySelector('.testimonials-header .section-title').textContent = cfg.testimonialsTitle;
+            if (cfg.testimonials && cfg.testimonials.length) {
+                const grid = document.querySelector('.testimonials-grid');
+                grid.innerHTML = cfg.testimonials.map(t => {
+                    const initials = t.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+                    return `
+                    <div class="testimonial-card reveal visible">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <blockquote>"${escHtml(t.text)}"</blockquote>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">${initials}</div>
+                            <div class="testimonial-author-info">
+                                <strong>${escHtml(t.name)}</strong>
+                                <span>${escHtml(t.role)}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+
+            // Price
+            if (cfg.priceOld) document.querySelector('.price-old').textContent = 'De R$ ' + cfg.priceOld;
+            if (cfg.priceCurrent) document.querySelector('.price-current').innerHTML = '<small>R$</small> ' + escHtml(cfg.priceCurrent);
+            if (cfg.priceInstallment) document.querySelector('.price-installment').textContent = cfg.priceInstallment;
+
+            // Price features
+            if (cfg.priceFeatures && cfg.priceFeatures.length) {
+                const ul = document.querySelector('.price-features');
+                ul.innerHTML = cfg.priceFeatures.map(f => `<li><span class="check">✓</span> ${escHtml(f)}</li>`).join('');
+            }
+
+            // Guarantee
+            if (cfg.guaranteeTitle) document.querySelector('.guarantee-box strong').textContent = cfg.guaranteeTitle;
+            if (cfg.guaranteeText) document.querySelector('.guarantee-box p').textContent = cfg.guaranteeText;
+
+            // FAQ
+            if (cfg.faqs && cfg.faqs.length) {
+                const list = document.querySelector('.faq-list');
+                list.innerHTML = cfg.faqs.map(f => `
+                    <div class="faq-item reveal visible">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            ${escHtml(f.q)}
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">${escHtml(f.a)}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Kiwify checkout URL
+            if (cfg.kiwifyUrl) {
+                const checkoutBtn = document.getElementById('kiwifyCheckoutBtn');
+                if (checkoutBtn) checkoutBtn.href = cfg.kiwifyUrl;
+                const ctaBtn = document.getElementById('kiwifyCtaBtn');
+                if (ctaBtn) { ctaBtn.href = cfg.kiwifyUrl; ctaBtn.target = '_blank'; }
+            }
+
+            // WhatsApp float
+            if (cfg.whatsappNumber) {
+                const floatBtn = document.querySelector('.whatsapp-float');
+                const msg = cfg.whatsappFloatMsg || 'Olá! Gostaria de saber mais sobre o curso.';
+                floatBtn.href = `https://wa.me/${cfg.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+            }
+        }
+
+        applyConfig();
+
+        // ===================== COUNTDOWN =====================
+        function startCountdown() {
+            let end;
+            if (cfg && cfg.countdownMode === 'fixed' && cfg.countdownDate) {
+                end = new Date(cfg.countdownDate);
+            } else {
+                end = new Date();
+                end.setHours(23, 59, 59, 999);
+            }
+
+            function update() {
+                const diff = end - new Date();
+                if (diff <= 0) {
+                    document.getElementById('cd-hours').textContent = '00';
+                    document.getElementById('cd-mins').textContent = '00';
+                    document.getElementById('cd-secs').textContent = '00';
+                    return;
+                }
+                const h = Math.floor(diff / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+                document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+                document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+            }
+            update();
+            setInterval(update, 1000);
+        }
+        startCountdown();
+
+        // ===================== MODULES ACCORDION =====================
+        function toggleModule(header) {
+            const item = header.parentElement;
+            const body = item.querySelector('.module-body');
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.module-item.open').forEach(el => {
+                el.classList.remove('open');
+                el.querySelector('.module-body').style.maxHeight = null;
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                body.style.maxHeight = body.scrollHeight + 'px';
+            }
+        }
+
+        // ===================== FAQ ACCORDION =====================
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.faq-item.open').forEach(el => {
+                el.classList.remove('open');
+                el.querySelector('.faq-answer').style.maxHeight = null;
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        }
+
+
+        // ===================== SCROLL REVEAL =====================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ===================== SMOOTH SCROLL =====================
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
