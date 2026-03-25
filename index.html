@@ -1081,28 +1081,31 @@
         // ===================== LOAD CONFIG FROM ADMIN =====================
         const cfg = {"courseName": "Curso Completo — Transforme Sua Carreira", "topbarText": "🔥 OFERTA POR TEMPO LIMITADO — Garanta seu desconto antes que acabe!", "heroBadge": "Vagas Limitadas", "heroTitle": "Domine Novas Habilidades e *Transforme* Sua Carreira", "heroSubtitle": "Aprenda com quem já trilhou o caminho. Um curso completo, prático e direto ao ponto para você alcançar resultados reais.", "videoType": "custom", "videoUrl": "file:///C:/Users/wesle/Downloads/WhatsApp%20Video%202026-03-22%20at%2014.33.53.mp4", "benefitsTitle": "Tudo que você precisa em um só lugar", "benefits": [{"icon": "📹", "title": "Aulas em Vídeo HD", "desc": "Conteúdo gravado em alta qualidade, com explicações claras e exemplos práticos do dia a dia."}, {"icon": "📋", "title": "Material de Apoio", "desc": "PDFs, planilhas e templates prontos para você aplicar imediatamente no seu trabalho."}, {"icon": "🎯", "title": "Certificado", "desc": "Receba seu certificado de conclusão para comprovar suas novas habilidades."}, {"icon": "💬", "title": "Suporte Direto", "desc": "Tire suas dúvidas diretamente com o instrutor via grupo exclusivo de alunos."}, {"icon": "♾️", "title": "Acesso Vitalício", "desc": "Compre uma vez e tenha acesso para sempre, incluindo futuras atualizações do curso."}, {"icon": "📱", "title": "Acesse de Qualquer Lugar", "desc": "Assista pelo celular, tablet ou computador. Estude no seu ritmo, onde e quando quiser."}], "modulesTitle": "O que você vai aprender", "modules": [{"title": "Introdução e Fundamentos", "duration": "4 aulas • 45 min", "lessons": ["Boas-vindas e visão geral do curso", "Conceitos fundamentais que você precisa dominar", "Configurando seu ambiente de trabalho", "Primeiros passos práticos"]}, {"title": "Aprofundando o Conhecimento", "duration": "6 aulas • 1h 20min", "lessons": ["Técnicas avançadas passo a passo", "Estudos de caso reais", "Erros comuns e como evitá-los", "Exercícios práticos guiados", "Estratégias para otimizar resultados", "Revisão e consolidação"]}, {"title": "Estratégias Avançadas", "duration": "5 aulas • 1h 05min", "lessons": ["Métodos que os profissionais usam", "Automatizando processos", "Análise de métricas e resultados", "Escalando suas operações", "Projeto final guiado"]}, {"title": "Bônus Exclusivos", "duration": "3 aulas • 35min", "lessons": ["Masterclass com convidado especial", "Templates e ferramentas exclusivas", "Plano de ação personalizado"]}], "testimonialsTitle": "O que nossos alunos dizem", "testimonials": [{"name": "Marcos Almeida", "role": "Empreendedor Digital", "text": "O melhor investimento que fiz na minha carreira. O conteúdo é extremamente prático e já comecei a ver resultados na primeira semana."}, {"name": "Juliana Santos", "role": "Designer Freelancer", "text": "Curso didático, direto ao ponto. O suporte é incrível, todas as minhas dúvidas foram respondidas rapidamente."}, {"name": "Rafael Costa", "role": "Analista de Marketing", "text": "Eu já fiz vários cursos online, mas esse é diferente. A qualidade do material e a clareza das explicações são outro nível."}], "priceOld": "180,00", "priceCurrent": "69,99", "priceInstallment": "ou 12x de R$ 6,99", "priceFeatures": ["Acesso vitalício ao curso completo", "+18 aulas em vídeo HD", "Material de apoio para download", "Certificado de conclusão", "Suporte direto com o instrutor", "Grupo exclusivo de alunos", "Atualizações futuras gratuitas", "Bônus exclusivos"], "guaranteeTitle": "Garantia de 7 dias", "guaranteeText": "Se não gostar do curso, devolvemos 100% do seu dinheiro. Sem perguntas.", "countdownMode": "endofday", "countdownDate": "", "faqs": [{"q": "Por quanto tempo terei acesso ao curso?", "a": "O acesso é vitalício! Depois de adquirir o curso, você pode assistir quantas vezes quiser, para sempre."}, {"q": "O curso oferece certificado?", "a": "Sim! Ao concluir todas as aulas, você receberá um certificado digital de conclusão."}, {"q": "E se eu não gostar do curso?", "a": "Oferecemos garantia incondicional de 7 dias. Devolvemos 100% do seu investimento."}, {"q": "Preciso ter conhecimento prévio?", "a": "Não! O curso foi pensado para iniciantes e também para quem já tem experiência."}, {"q": "Como funciona o suporte?", "a": "Você terá acesso a um grupo exclusivo de alunos e pode entrar em contato via WhatsApp."}, {"q": "Quais formas de pagamento são aceitas?", "a": "Aceitamos PIX, cartão de crédito (em até 12x) e boleto bancário."}], "kiwifyUrl": "", "whatsappNumber": "5500000000000", "whatsappFloatMsg": "Olá! Gostaria de saber mais sobre o curso."};
 
-        function escHtml(s) { return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
+        function escHtml(s) { return s ? s.replace(/&/g,'&amp;').replace(/\x3c/g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
+
+        function $(sel) { return document.querySelector(sel); }
 
         function applyConfig() {
             if (!cfg) return;
-
+            try {
             // Top bar
-            if (cfg.topbarText) document.querySelector('.top-bar span').textContent = cfg.topbarText;
+            if (cfg.topbarText) { const el = $('.top-bar span'); if (el) el.textContent = cfg.topbarText; }
 
             // Hero
-            if (cfg.heroBadge) document.querySelector('.hero-badge').textContent = cfg.heroBadge;
+            if (cfg.heroBadge) { const el = $('.hero-badge'); if (el) el.textContent = cfg.heroBadge; }
             if (cfg.heroTitle) {
-                const h1 = document.querySelector('.hero h1');
-                h1.innerHTML = cfg.heroTitle.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                const h1 = $('.hero h1');
+                if (h1) h1.innerHTML = cfg.heroTitle.replace(/\*([^*]+)\*/g, '\x3cem\x3e$1\x3c/em\x3e');
             }
-            if (cfg.heroSubtitle) document.querySelector('.hero-content > p').textContent = cfg.heroSubtitle;
+            if (cfg.heroSubtitle) { const el = $('.hero-content > p'); if (el) el.textContent = cfg.heroSubtitle; }
 
             // Page title
             if (cfg.courseName) document.title = cfg.courseName;
 
             // Video
             if (cfg.videoUrl) {
-                const wrapper = document.querySelector('.video-wrapper');
+                try {
+                const wrapper = $('.video-wrapper');
                 const placeholder = document.getElementById('videoPlaceholder');
                 let embedUrl = '';
                 if (cfg.videoType === 'youtube') {
@@ -1110,14 +1113,14 @@
                 } else if (cfg.videoType === 'vimeo') {
                     embedUrl = 'https://player.vimeo.com/video/' + cfg.videoUrl;
                 }
-                if (cfg.videoType === 'custom') {
+                if (cfg.videoType === 'custom' && wrapper) {
                     const video = document.createElement('video');
                     video.src = cfg.videoUrl;
                     video.controls = true;
                     video.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
                     if (placeholder) placeholder.remove();
                     wrapper.appendChild(video);
-                } else if (embedUrl) {
+                } else if (embedUrl && wrapper) {
                     const iframe = document.createElement('iframe');
                     iframe.src = embedUrl;
                     iframe.allowFullscreen = true;
@@ -1126,13 +1129,14 @@
                     if (placeholder) placeholder.remove();
                     wrapper.appendChild(iframe);
                 }
+                } catch(e) { console.warn('Video config error:', e); }
             }
 
             // Benefits
-            if (cfg.benefitsTitle) document.querySelector('.benefits-header .section-title').textContent = cfg.benefitsTitle;
+            if (cfg.benefitsTitle) { const el = $('.benefits-header .section-title'); if (el) el.textContent = cfg.benefitsTitle; }
             if (cfg.benefits && cfg.benefits.length) {
-                const grid = document.querySelector('.benefits-grid');
-                grid.innerHTML = cfg.benefits.map(b => `
+                const grid = $('.benefits-grid');
+                if (grid) grid.innerHTML = cfg.benefits.map(b => `
                     <div class="benefit-card reveal visible">
                         <div class="benefit-icon">${escHtml(b.icon)}</div>
                         <h3>${escHtml(b.title)}</h3>
@@ -1142,10 +1146,10 @@
             }
 
             // Modules
-            if (cfg.modulesTitle) document.querySelector('.modules-header .section-title').textContent = cfg.modulesTitle;
+            if (cfg.modulesTitle) { const el = $('.modules-header .section-title'); if (el) el.textContent = cfg.modulesTitle; }
             if (cfg.modules && cfg.modules.length) {
-                const list = document.querySelector('.module-list');
-                list.innerHTML = cfg.modules.map((m, i) => `
+                const list = $('.module-list');
+                if (list) list.innerHTML = cfg.modules.map((m, i) => `
                     <div class="module-item reveal visible">
                         <div class="module-header" onclick="toggleModule(this)">
                             <span class="module-num">${String(i+1).padStart(2,'0')}</span>
@@ -1165,10 +1169,10 @@
             }
 
             // Testimonials
-            if (cfg.testimonialsTitle) document.querySelector('.testimonials-header .section-title').textContent = cfg.testimonialsTitle;
+            if (cfg.testimonialsTitle) { const el = $('.testimonials-header .section-title'); if (el) el.textContent = cfg.testimonialsTitle; }
             if (cfg.testimonials && cfg.testimonials.length) {
-                const grid = document.querySelector('.testimonials-grid');
-                grid.innerHTML = cfg.testimonials.map(t => {
+                const grid = $('.testimonials-grid');
+                if (grid) grid.innerHTML = cfg.testimonials.map(t => {
                     const initials = t.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
                     return `
                     <div class="testimonial-card reveal visible">
@@ -1186,24 +1190,24 @@
             }
 
             // Price
-            if (cfg.priceOld) document.querySelector('.price-old').textContent = 'De R$ ' + cfg.priceOld;
-            if (cfg.priceCurrent) document.querySelector('.price-current').innerHTML = '<small>R$</small> ' + escHtml(cfg.priceCurrent);
-            if (cfg.priceInstallment) document.querySelector('.price-installment').textContent = cfg.priceInstallment;
+            if (cfg.priceOld) { const el = $('.price-old'); if (el) el.textContent = 'De R$ ' + cfg.priceOld; }
+            if (cfg.priceCurrent) { const el = $('.price-current'); if (el) el.innerHTML = '\x3csmall\x3eR$\x3c/small\x3e ' + escHtml(cfg.priceCurrent); }
+            if (cfg.priceInstallment) { const el = $('.price-installment'); if (el) el.textContent = cfg.priceInstallment; }
 
             // Price features
             if (cfg.priceFeatures && cfg.priceFeatures.length) {
-                const ul = document.querySelector('.price-features');
-                ul.innerHTML = cfg.priceFeatures.map(f => `<li><span class="check">✓</span> ${escHtml(f)}</li>`).join('');
+                const ul = $('.price-features');
+                if (ul) ul.innerHTML = cfg.priceFeatures.map(f => `<li><span class="check">✓</span> ${escHtml(f)}</li>`).join('');
             }
 
             // Guarantee
-            if (cfg.guaranteeTitle) document.querySelector('.guarantee-box strong').textContent = cfg.guaranteeTitle;
-            if (cfg.guaranteeText) document.querySelector('.guarantee-box p').textContent = cfg.guaranteeText;
+            if (cfg.guaranteeTitle) { const el = $('.guarantee-box strong'); if (el) el.textContent = cfg.guaranteeTitle; }
+            if (cfg.guaranteeText) { const el = $('.guarantee-box p'); if (el) el.textContent = cfg.guaranteeText; }
 
             // FAQ
             if (cfg.faqs && cfg.faqs.length) {
-                const list = document.querySelector('.faq-list');
-                list.innerHTML = cfg.faqs.map(f => `
+                const list = $('.faq-list');
+                if (list) list.innerHTML = cfg.faqs.map(f => `
                     <div class="faq-item reveal visible">
                         <button class="faq-question" onclick="toggleFaq(this)">
                             ${escHtml(f.q)}
@@ -1226,10 +1230,13 @@
 
             // WhatsApp float
             if (cfg.whatsappNumber) {
-                const floatBtn = document.querySelector('.whatsapp-float');
-                const msg = cfg.whatsappFloatMsg || 'Olá! Gostaria de saber mais sobre o curso.';
-                floatBtn.href = `https://wa.me/${cfg.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+                const floatBtn = $('.whatsapp-float');
+                if (floatBtn) {
+                    const msg = cfg.whatsappFloatMsg || 'Olá! Gostaria de saber mais sobre o curso.';
+                    floatBtn.href = `https://wa.me/${cfg.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+                }
             }
+            } catch(e) { console.error('applyConfig error:', e); }
         }
 
         applyConfig();
