@@ -146,6 +146,7 @@
             top: 0; left: -100%; width: 60%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
             animation: shimmer 4s ease-in-out infinite;
+            pointer-events: none;
         }
         .top-bar span { animation: pulse 2s infinite; position: relative; z-index: 1; }
 
@@ -691,6 +692,7 @@
             top: 0; left: -100%; width: 60%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
+            pointer-events: none;
         }
         .btn-submit:hover::after { left: 120%; }
         .btn-submit:hover {
